@@ -20,7 +20,7 @@ public class Wave extends DisplacementFilter {
 
 	@Override
 	public Vector source(Vector dst, Vector dim) {
-		return dst;
+		return new Vector(dst.x, dst.y + amplitude * Math.sin(2 * Math.PI * dst.x / wavelength));
 		
 	}
 	
