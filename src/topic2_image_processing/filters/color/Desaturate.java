@@ -19,7 +19,7 @@ public class Desaturate extends ColorFilter {
 	public Color processColor(Color input) {
 		return Color.hsb(
 				input.getHue(),
-				input.getSaturation(),
+				input.getSaturation() * saturationFactor,
 				input.getBrightness(),
 				input.getOpacity()
 				);
