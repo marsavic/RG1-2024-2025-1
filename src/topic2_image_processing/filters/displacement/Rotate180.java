@@ -11,7 +11,7 @@ public class Rotate180 extends DisplacementFilter {
 	@Override
 	public Vector source(Vector dst, Vector dim) {
 		// Vracamo poziciju koja je centralno simetricna u odosu na centar slike.
-		return new Vector(0, 0);
+		return new Vector(dim.x - 1 - dst.x, dim.y - 1 - dst.y);
 	}
 	
 }
