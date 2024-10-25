@@ -11,8 +11,8 @@ public class Sepia extends ColorFilter {
 	@Override
 	public Color processColor(Color input) {
 		return Color.hsb(
-				input.getHue(),
-				input.getSaturation(),
+				43,
+				0.5,
 				input.getBrightness(),
 				input.getOpacity()
 				);
