@@ -19,7 +19,13 @@ public class Accent extends ColorFilter {
 
 	@Override
 	public Color processColor(Color input) {
-			return Color.hsb(input.getHue(), input.getSaturation(), input.getBrightness());
+		double opseg = Math.abs(accentHue - input.getHue());
+		if(opseg > 180)
+			opseg = 360 - opseg;
+		if(opseg < delta)
+			return input;
+		else
+			return Color.hsb(input.getHue(), 0, input.getBrightness());
 	}
 	
 }
