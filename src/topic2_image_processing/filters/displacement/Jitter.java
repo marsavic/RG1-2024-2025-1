@@ -23,8 +23,12 @@ public class Jitter extends DisplacementFilter {
 	@Override
 	public Vector source(Vector dst, Vector dim) {
 		// Source pozicija nam je slucajno generisana pozicija unutar kruga poluprecnika r sa centrom u dst.
-		
-		return dst;
+		double phi = random.nextDouble();                // Nasumicno biramo ugao.
+		double d = r * random.nextDouble();              // Nasumicno biramo udaljenost.
+
+		// Vector.polar(d, phi) vraca vektor sa uglom phi i intenzitetom d.
+		// Da bi smo dobili source poziciju, taj vektor dodajemo na dst.
+		return dst.add(Vector.polar(d, phi));
 	}
 	
 }
