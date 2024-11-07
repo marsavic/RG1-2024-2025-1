@@ -25,6 +25,30 @@ public class SemaphoreSign implements Drawing {
 	public void draw(View view) {
 		DrawingUtils.clear(view, Color.gray(0.25));
 		
+		// Kvadrat
+		view.setFill(Color.hsb(60, 0.7, 0.96));
+		view.fillPolygon(corners);
+		
+		// Ivica kvadrata
+		view.setLineWidth(20);
+		view.setStroke(Color.BLACK);
+		view.strokePolygon(corners);
+				
+		// Pravougaonik
+		view.setFill(Color.BLACK);
+		view.fillRectCentered(Vector.ZERO, new Vector(r+d, 3*r + 2*d));
+		
+		// Crveno svetlo
+		view.setFill(Color.hsb(0, 0.7, 0.96));
+		view.fillCircleCentered(new Vector(0, 2*r+d), r);
+
+		// Žuto svetlo
+		view.setFill(Color.hsb(60, 0.7, 0.96));
+		view.fillCircleCentered(Vector.ZERO, r);
+		
+		// Zeleno svetlo
+		view.setFill(Color.hsb(120, 0.7, 0.96));
+		view.fillCircleCentered(new Vector(0, -2*r-d), r);
 	}
 	
 	
