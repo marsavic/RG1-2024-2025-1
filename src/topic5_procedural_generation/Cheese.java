@@ -33,7 +33,16 @@ public class Cheese implements Drawing {
 	
 	
 	double getMaxRadius(Vector c) {
-		
+		double dMin = Double.POSITIVE_INFINITY;
+		for (Hole hole : holes) {
+			
+			double d = c.distanceTo(hole.c) - hole.r;
+			if (d < dMin) {
+				dMin = d;
+			}
+			
+		}
+		return Math.min(dMin - gap, Hole.R_MAX);
 	}
 	
 	
@@ -43,13 +52,42 @@ public class Cheese implements Drawing {
 	
 	
 	void generateHoles() {
+		holes = new ArrayList<>();
+		int nSuccesiveFails = 0;
 		
+		while (nSuccesiveFails < 10000) {	
+			
+			// Generisanje centra i poluprečnika rupe
+			Vector c = getCenter();
+			double r = getMaxRadius(c);
+			
+			if (r >= Hole.R_MIN) {
+				
+				holes.add(new Hole(c, r));
+				nSuccesiveFails = 0;
+				
+			} else {
+				nSuccesiveFails++;
+			}
+			
+		}
 	}
 	
 	@Override
 	public void draw(View view) {
 		DrawingUtils.clear(view, Color.hsb(50, 0.9, 0.9));
 		
+		for (Hole hole : holes) {
+			// Spoljni krug
+			view.setFill(Color.hsb(50, 0.6, 1.0));
+			view.fillCircleCentered(hole.c, hole.r);
+
+			// Unutrašnji krug sa senkom
+			view.setEffect(new InnerShadow(20, 10, -10, Color.BLACK));
+			view.setFill(Color.hsb(50, 0.9, 0.4));
+			view.fillCircleCentered(hole.c, hole.r - border);
+			view.setEffect(null);
+		}
 	}
 
 	
